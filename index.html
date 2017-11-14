@@ -1,0 +1,153 @@
+<!doctype HTML>
+<html>
+
+<head>
+<title> My Title </title>
+
+<style>
+    img {
+        width:150px;
+    }
+    input{
+        width:50px;
+    }
+    /*div{
+        background-color: orange;
+        width:300px;
+    }*/
+    body{
+        background-color: blue ;
+    }
+    h1{
+        text-align: center;
+    }
+    #div1{
+        display: inline-block;
+        width: 30%;
+         background-color: lightseagreen;
+    }
+    #div2{
+        display: inline-block;
+                        width: 30%;
+                         background-color: lightseagreen;
+    }
+    #div3{
+        display: inline-block;
+                        width: 30%;
+                         background-color: lightseagreen;
+
+    }
+
+
+
+
+
+
+
+
+</style>
+
+
+<script>
+    pr1 = 12, wpr1 = 5;
+    pr2 = 6, wpr2 = 2;
+    pr3 = 20, wpr3 = 10;
+    var taxRate = 8.75;
+
+
+
+    function initPrices(){
+        document.getElementById("span1").innerHTML = "Price: $"+pr1;
+        document.getElementById("span2").innerHTML = "Price: $"+pr2;
+        document.getElementById("span3").innerHTML = "Price: $"+pr3;
+
+
+    }
+            
+    function ProcessOrder(){
+        q1 = parseInt(document.getElementById("qty1").value);
+        q2 = parseInt(document.getElementById("qty2").value);
+        q3 = parseInt(document.getElementById("qty3").value);
+
+        var CustSubTotal = (pr1*q1) + (pr2*q2) + (pr3*q3);
+        var CompanySubTotal = (wpr1*q1) + (wpr2*q2) + (wpr3*q3);
+        var Tax = CustSubTotal * taxRate/100;
+        var Profit = CustSubTotal - CompanySubTotal;
+        var Shipping = 0;
+
+        if (CustSubTotal <100){
+            shipping = 25;
+        }else if (CustSubTotal >=100 && CustSubTotal <=200){
+            shipping = 10;
+        }else shipping = 0;
+
+        var CustTotal = CustSubTotal + Tax + Shipping;
+        var ItemsSold = q1 + q2 + q3;
+        var op = document.getElementById("output");
+        var build = "";
+
+        build += "<div id='custinfo'>";
+        build += "<pre>";
+        build += "**   CUSTOMER ORDER DETAILS  ** <br>";
+        build += "---------------------------------- <br>";
+        build += "Subtotal:               $ " + CustSubTotal.toFixed(2) +"<br>";
+        build += "Tax:                    $ " + Tax.toFixed(2) +"<br>";
+        build += "Shipping & Handling:    $ " + Shipping +"<br>";
+        build += "Your TOTAL:             $ " + CustTotal.toFixed(2) +"<br><br>";
+        build += "</div>";
+
+
+        build += "<br><hr>";
+        build += "<div id='companyInfo'>";
+        build += "<pre>";
+        build += "**   ORDER DETAILS FOR COMPANY   ** <br>";
+        build += "-------------------------------------- <br>";
+        build += "Total Items Sold:   " + ItemsSold +"<br>";
+        build += "Customer Subtotal:     $ " + CustSubTotal.toFixed(2) +"<br>";
+        build += "Company Subtotal:      $ " + CompanySubTotal.toFixed(2) +"<br>";
+        build += "Profit/Loss:           $ " + Profit.toFixed(2) +"<br><br>";
+        build += "</div>";
+
+        op.innerHTML = build;
+
+
+    }
+
+</script>
+
+</head>
+
+<body onload= "initPrices()"> 
+
+
+
+    <h1>Matt Dullahan's Basketball Hub </h1>
+    <div id="div1">
+        <img src ="evolution.jpeg"><br>
+        <p>The Wilson Evolution Basketball is a composite leather ball intended for indoor use</p><br>
+        <span id="span1"></span>
+        <input type="text" id="qty1"  placeholder="Enter #">
+    </div>
+
+    <div id="div2">
+        <img src ="sleeve.jpg"><br>
+        <p>Nike Dri-FIT technology is flexible, sweat proof,used for Basketball, Football, Golf, track,and usable in all weather.</p><br>
+        <span id="span2"></span>
+        <input type="text" id="qty2"  placeholder="Enter #">
+    </div>
+    <div id="div3">
+        <img src ="kyrie.jpg"><br>
+        <p>With advanced traction, zoned support and lightweight cushioning, the Kyrie 3 basketball shoe is designed to be durable and comfortable.</p><br>
+        <span id="span3"></span>
+        <input type="text" id="qty3"  placeholder="Enter #">
+    </div>
+
+
+    <button onclick="ProcessOrder()"> Process Order </button>
+    <br>
+    <div id="output"></div>
+    
+    
+</body>
+
+</html>
